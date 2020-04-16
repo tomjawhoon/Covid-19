@@ -2,6 +2,7 @@ import useSWR from 'swr';
 import fetch from 'unfetch';
 import columns from '../components/DataTableColumns';
 import DataTable from 'react-data-table-component';
+import Loading from '../components/Loading';
 //import FlippingCard from 'react-ui-cards';
 import DataChart from '../components/DataChart';
 import TimeSeriesChart from '../components/TimeSeriesChart';
@@ -13,7 +14,9 @@ const IndexPage = () => {
     const { data, error } = useSWR(apiUrl, fetcher); // success => data error => error
     const { data: timeseries } = useSWR(timeseriesUrl, fetcher); // success =>
     if (!data) {
-        return <p>Not Error</p>
+        return (
+        <Loading />
+        );
     }
 
     if (error) {
@@ -36,6 +39,7 @@ const IndexPage = () => {
                 .title{
                     text-align: center;
                 }
+                  
             `}</style>
 
             <h2 className="title">COVID-19 Realtime</h2>
